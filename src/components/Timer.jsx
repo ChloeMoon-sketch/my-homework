@@ -84,15 +84,15 @@ export default function Timer() {
           <div style={{ fontSize: '1.1rem', fontWeight: 600 }}>Focus Timer</div>
           
           {isRunning || timeLeft > 0 ? (
-            <div style={{ fontSize: '3rem', fontWeight: 700, fontFamily: 'monospace', letterSpacing: '1px', color: 'var(--accent)' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: 700, fontFamily: 'monospace', letterSpacing: '1px', color: 'var(--accent)' }}>
               {formatTime(timeLeft)}
             </div>
           ) : (
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
               <input type="number" min="0" max="23" value={h} onChange={e => setH(parseInt(e.target.value) || 0)} style={inputStyle} />
-              <span>:</span>
+              <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>:</span>
               <input type="number" min="0" max="59" value={m} onChange={e => setM(parseInt(e.target.value) || 0)} style={inputStyle} />
-              <span>:</span>
+              <span style={{ fontSize: '1.2rem', fontWeight: 600 }}>:</span>
               <input type="number" min="0" max="59" value={s} onChange={e => setS(parseInt(e.target.value) || 0)} style={inputStyle} />
             </div>
           )}
@@ -143,10 +143,10 @@ const inputStyle = {
   background: 'rgba(255, 255, 255, 0.1)',
   border: '1px solid rgba(255, 255, 255, 0.2)',
   color: 'white',
-  padding: '8px',
-  borderRadius: '8px',
-  width: '52px',
-  fontSize: '1.5rem',
+  padding: '6px',
+  borderRadius: '6px',
+  width: '44px',
+  fontSize: '1.2rem',
   textAlign: 'center',
   outline: 'none',
   fontFamily: 'monospace'
