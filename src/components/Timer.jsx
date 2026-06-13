@@ -145,7 +145,7 @@ const inputStyle = {
   color: 'white',
   padding: '6px',
   borderRadius: '6px',
-  width: '44px',
+  width: '48px',
   fontSize: '1.2rem',
   textAlign: 'center',
   outline: 'none',
