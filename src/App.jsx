@@ -3,19 +3,35 @@ import Timer from './components/Timer';
 import SoundSelector from './components/SoundSelector';
 import MenuSelector from './components/MenuSelector';
 import AvatarSelector from './components/AvatarSelector';
+import EthicalGate from './components/EthicalGate';
+import Footer from './components/Footer';
+import PolicyModal from './components/PolicyModal';
 import './index.css';
 
 function App() {
   const [selectedDrink, setSelectedDrink] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [isDancing, setIsDancing] = useState(false);
+  const [activeModal, setActiveModal] = useState(null); // 'terms' | 'privacy' | null
+  const [isAgreed, setIsAgreed] = useState(() => {
+    return localStorage.getItem('ethical_agreed') === 'true';
+  });
+
+  const handleAgree = () => {
+    localStorage.setItem('ethical_agreed', 'true');
+    setIsAgreed(true);
+  };
+
+  if (!isAgreed) {
+    return <EthicalGate onAgree={handleAgree} />;
+  }
 
   return (
     <div className="app-container">
       {/* Settings Overlay */}
       <div style={{
         position: 'absolute',
-        top: 0, bottom: 0, right: 0,
+        top: 0, bottom: '60px', right: 0,
         width: '400px',
         padding: '32px',
         display: 'flex',
@@ -42,12 +58,12 @@ function App() {
       {/* Main View Area */}
       <div style={{
         position: 'absolute',
-        left: 0, top: 0, bottom: 0, right: '400px',
+        left: 0, top: 0, bottom: '60px', right: '400px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        paddingBottom: '100px',
+        paddingBottom: '40px', // Adjusted since bottom is 60px now
         zIndex: 5
       }}>
         {selectedAvatar && (
@@ -110,8 +126,19 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Footer */}
+      <Footer onOpenModal={(type) => setActiveModal(type)} />
+
+      {/* Policy and Terms Modal */}
+      <PolicyModal 
+        type={activeModal} 
+        isOpen={activeModal !== null} 
+        onClose={() => setActiveModal(null)} 
+      />
     </div>
   );
 }
 
 export default App;
+
